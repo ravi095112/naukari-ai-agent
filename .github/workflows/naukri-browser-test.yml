@@ -32,6 +32,10 @@ jobs:
           mkdir -p data
           printf '%s' "$NAUKRI_STORAGE_STATE" > data/naukri-storage-state-min.json
 
+      - name: Test Naukri connectivity
+        run: |
+            curl -I -L --max-time 30 https://www.naukri.com/
+
       - name: Run Naukri browser test
         env:
           DISPLAY: :99
