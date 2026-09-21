@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATE_FILE = BASE_DIR / "data" / "naukri-storage-state.json"
+STATE_FILE = BASE_DIR / "data" / "naukri-storage-state-min.json"
 
 PROFILE_URL = "https://www.naukri.com/mnjuser/profile"
 
@@ -12,7 +12,7 @@ PROFILE_URL = "https://www.naukri.com/mnjuser/profile"
 with sync_playwright() as playwright:
 
     browser = playwright.chromium.launch(
-        headless=True
+        headless=False
     )
 
     context = browser.new_context(

@@ -1,0 +1,40 @@
+name: Naukri Agent - Browser Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  browser-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+
+      - name: Install Playwright Chromium
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Create storage state
+        env:
+          NAUKRI_STORAGE_STATE: ${{ secrets.NAUKRI_STORAGE_STATE }}
+        run: |
+          mkdir -p data
+          printf '%s' "$NAUKRI_STORAGE_STATE" > data/naukri-storage-state-min.json
+
+      - name: Run Naukri browser test
+        env:
+          DISPLAY: :99
+        run: |
+          Xvfb :99 -screen 0 1440x900x24 &
+          python app/test_storage_state.py

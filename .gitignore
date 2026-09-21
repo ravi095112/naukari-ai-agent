@@ -14,3 +14,4 @@ logs/
 
 *.log
 data/naukari-browser/
+data/naukri-storage-state-min.json
