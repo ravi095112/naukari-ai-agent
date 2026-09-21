@@ -25,7 +25,7 @@ with sync_playwright() as playwright:
 
     page.goto(
         PROFILE_URL,
-        wait_until="domcontentloaded",
+        wait_until="commit",
         timeout=60000,
     )
 
