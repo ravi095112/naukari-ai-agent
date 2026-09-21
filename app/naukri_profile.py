@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -19,8 +20,16 @@ def open_profile():
             headless=True,
         )
 
+        try:
+            storage_state_data = json.loads(storage_state)
+        except json.JSONDecodeError as exc:
+            playwright.stop()
+            raise RuntimeError(
+                "NAUKRI_STORAGE_STATE is not valid JSON."
+            ) from exc
+
         context = browser.new_context(
-            storage_state=storage_state,
+            storage_state=storage_state_data,
             viewport={"width": 1440, "height": 900},
         )
     else:
