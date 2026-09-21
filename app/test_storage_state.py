@@ -12,7 +12,8 @@ PROFILE_URL = "https://www.naukri.com/mnjuser/profile"
 with sync_playwright() as playwright:
 
     browser = playwright.chromium.launch(
-        headless=False
+        headless=False,
+        args=["--disable-http2"],
     )
 
     context = browser.new_context(
