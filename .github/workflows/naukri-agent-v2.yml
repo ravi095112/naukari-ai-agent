@@ -1,0 +1,35 @@
+name: Naukri AI Agent - V2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Run Naukri AI Agent
+        env:
+          DISPLAY: :99
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NAUKRI_STORAGE_STATE: ${{ secrets.NAUKRI_STORAGE_STATE }}
+        run: |
+          Xvfb :99 -screen 0 1440x900x24 -ac +extension RANDR &
+          python app/profile_agent.py
