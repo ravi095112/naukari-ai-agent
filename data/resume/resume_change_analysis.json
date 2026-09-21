@@ -1,0 +1,32 @@
+{
+  "analyzed_at": "2026-09-18T16:15:31.917488+00:00",
+  "resume_file": "Ravi_Kumar_Updated_Resume.docx",
+  "baseline_fingerprint": "f2af0dda2cb80e71c2048d2daeaa84c04b35584adef7125d88f4d5de71d32d52",
+  "current_fingerprint": "2df6e4a2cc7a633c00e358a6c94c036f1ac9055263036604475f8df75ea10a0d",
+  "changed": true,
+  "change_count": 1,
+  "meaningful_change_count": 1,
+  "review_required_count": 0,
+  "format_only_count": 0,
+  "approval_status": "APPROVED",
+  "naukri_upload_approved": true,
+  "changes": [
+    {
+      "line": 18,
+      "old": "Led front-end architecture using TypeScript and JavaScript (ES6+) within Vue.js, implementing strongly-typed state management and reusable components that optimized page load times by 35%.",
+      "new": "Led front-end architecture using TypeScript and JavaScript (ES6+) within Vue.js and React, implementing strongly-typed state management and reusable components that optimized page load times by 35%.",
+      "classification": "MEANINGFUL",
+      "categories": [
+        {
+          "category": "achievement",
+          "keywords": [
+            "optimized"
+          ]
+        }
+      ],
+      "reason": "Changed content contains career, technology, project, achievement, education, or certification information."
+    }
+  ],
+  "approved_at": "2026-09-18T16:16:26.346478+00:00",
+  "approval_confirmation": "YES"
+}

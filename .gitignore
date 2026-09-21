@@ -1,0 +1,16 @@
+.venv/
+.env
+
+__pycache__/
+*.pyc
+
+data/naukri-browser/
+data/naukri-storage-state.json
+
+logs/
+
+.idea/
+.vscode/
+
+*.log
+data/naukari-browser/

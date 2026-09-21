@@ -1,0 +1,46 @@
+{
+  "skills": {
+    "Rest API Development": {
+      "evidence": [
+        "Developed Java-based RESTful APIs enabling seamless integration across 15+ microservices.",
+        "Built Java RESTful services with Spring Boot."
+      ],
+      "verified": true
+    },
+    "Docker": {
+      "evidence": [
+        "Docker is explicitly listed under Cloud & DevOps technical skills."
+      ],
+      "verified": true
+    },
+    "Kubernetes": {
+      "evidence": [],
+      "verified": false
+    },
+    "Kafka": {
+      "evidence": [],
+      "verified": false
+    },
+    "Generative Ai": {
+      "evidence": [
+        "Developed AI-enabled solutions within enterprise application environments.",
+        "Engineered an AI-driven chatbot using LangChain and Spring AI.",
+        "Implemented Retrieval-Augmented Generation (RAG) for context-aware data retrieval.",
+        "Completed Software Development Engineering with Applied AI certification."
+      ],
+      "verified": true
+    },
+    "Langchain": {
+      "evidence": [
+        "Engineered an AI-driven chatbot using LangChain and Spring AI."
+      ],
+      "verified": true
+    },
+    "Retrieval Augmented Generation": {
+      "evidence": [
+        "Implemented Retrieval-Augmented Generation (RAG) for context-aware data retrieval."
+      ],
+      "verified": true
+    }
+  }
+}
