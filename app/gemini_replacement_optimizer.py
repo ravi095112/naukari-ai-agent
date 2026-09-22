@@ -150,8 +150,8 @@ Return JSON in EXACTLY this structure:
     except errors.ServerError as exc:
 
         raise RuntimeError(
-            "Gemini server error while generating "
-            "replacement proposal. "
+            f"Gemini server error while generating "
+            f"replacement proposal: {exc}. "
             "No profile changes were made."
         ) from exc
 
