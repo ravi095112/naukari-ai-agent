@@ -204,6 +204,7 @@ def analyze_profile(profile: dict) -> dict:
         "capacity_status": capacity_status,
         "missing_target_skills": missing_target_skills,
         "replacement_candidates": replacement_candidates,
+        "current_key_skills": skills,
     }
 
 

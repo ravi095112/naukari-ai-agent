@@ -1,24 +1,65 @@
 from profile_reader import read_profile
-from profile_analyzer import analyze_profile
+from profile_analyzer import analyze_profile, normalize
 from evidence_checker import load_evidence, check_skill_evidence
 
 
 def get_verified_add_candidates(
-    analysis: dict,
-    evidence_data: dict,
+        analysis: dict,
+        evidence_data: dict,
 ) -> dict[str, list[str]]:
+    """
+    Find evidence-backed skills that are not currently present
+    in the Naukri Key Skills section.
+
+    A skill present only in the headline is still eligible because
+    the purpose of this engine is to optimize the Key Skills section.
+
+    Unsupported skills are never proposed.
+    """
 
     verified = {}
 
-    for skill in analysis["missing_target_skills"]:
+    current_key_skills = {
+        normalize(skill)
+        for skill in analysis.get("current_key_skills", [])
+    }
 
-        result = check_skill_evidence(
-            skill,
-            evidence_data,
+    skill_visibility = analysis.get(
+        "skill_visibility",
+        {}
+    )
+
+    for skill, status in skill_visibility.items():
+
+        # Already present in Key Skills -> nothing to add.
+        if status == "PRESENT_IN_SKILLS":
+            continue
+
+        # Check exact evidence record.
+        skill_data = evidence_data.get(
+            "skills",
+            {}
+        ).get(skill)
+
+        if not skill_data:
+            continue
+
+        if not skill_data.get("verified"):
+            continue
+
+        evidence = skill_data.get(
+            "evidence",
+            []
         )
 
-        if result["decision"] == "PROPOSE":
-            verified[skill] = result["evidence"]
+        if not evidence:
+            continue
+
+        # Final protection against duplicate Key Skills.
+        if normalize(skill) in current_key_skills:
+            continue
+
+        verified[skill] = evidence
 
     return verified
 
