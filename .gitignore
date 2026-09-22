@@ -15,3 +15,7 @@ logs/
 *.log
 data/naukari-browser/
 data/naukri-storage-state-min.json
+
+data/storage_state.json
+export_storage.py
+test_storage.py
