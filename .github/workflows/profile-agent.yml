@@ -1,0 +1,48 @@
+name: Daily Naukri Profile Agent
+
+on:
+  schedule:
+    # Runs daily at 03:30 UTC = 09:00 IST
+    - cron: "30 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  run-profile-agent:
+    runs-on: self-hosted
+
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install chromium
+
+      - name: Run Naukri Profile Agent
+        env:
+          NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
+          NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
+        run: |
+          python app/profile_agent.py
+
+      - name: Upload logs and artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: naukri-profile-agent-logs
+          path: |
+            logs/
+            output/
+          if-no-files-found: ignore
+          retention-days: 7
