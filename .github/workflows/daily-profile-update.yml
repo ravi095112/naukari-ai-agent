@@ -1,0 +1,35 @@
+name: Daily Naukri Profile Update
+
+on:
+  schedule:
+    - cron: "30 2 * * *"   # 2:30 UTC = 8:00 AM IST
+  workflow_dispatch: {}     # lets you trigger it manually too
+
+jobs:
+  update-profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run agent
+        env:
+          NAUKRI_STORAGE_STATE: ${{ secrets.NAUKRI_STORAGE_STATE }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python app/profile_agent.py
+
+      - name: Upload audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: profile-audit-log
+          path: logs/profile_audit.jsonl
