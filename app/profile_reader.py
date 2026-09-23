@@ -1,3 +1,5 @@
+import os
+
 from naukri_profile import (
     open_profile,
     read_resume_headline,
@@ -17,6 +19,13 @@ def read_profile():
             "resume_headline": headline,
             "key_skills": skills,
         }
+
+    except Exception:
+        os.makedirs("logs", exist_ok=True)
+        page.screenshot(path="logs/failure.png", full_page=True)
+        with open("logs/failure.html", "w", encoding="utf-8") as f:
+            f.write(page.content())
+        raise
 
     finally:
         context.close()
